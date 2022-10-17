@@ -6,6 +6,7 @@ import 'package:colorfilter_generator/colorfilter_generator.dart';
 import 'package:colorfilter_generator/presets.dart';
 import 'package:custom_image_editor/data/layer.dart';
 import 'package:custom_image_editor/utils/extensions.dart';
+import 'package:custom_image_editor/utils/picker_dialog.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +26,7 @@ import 'package:custom_image_editor/modules/text.dart';
 import 'package:custom_image_editor/layers/text_layer.dart';
 import 'package:screenshot/screenshot.dart';
 import 'dart:math' as math;
+import 'modules/all_stickers.dart';
 import 'modules/colors_picker.dart';
 import 'utils/custom_colors.dart';
 
@@ -441,8 +443,18 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
     var layersStack = Stack(
       children: layers.map((layerItem) {
         // Background layer
-        if (layerItem is BackgroundLayerData) {
+        if (layerItem is BackgroundLayerData && layerItem.isSticker == false) {
           return BackgroundLayer(
+            layerData: layerItem,
+            onUpdate: () {
+              setState(() {});
+            },
+          );
+        }
+
+        // Background layer
+        if (layerItem is BackgroundLayerData && layerItem.isSticker == true) {
+          return BackgroundStickerLayer(
             layerData: layerItem,
             onUpdate: () {
               setState(() {});
@@ -690,15 +702,18 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                                       ),
                                       TextButton(
                                         child: Text(
-                                          i18n('Reset'),
+                                            i18n('Custom'),
+                                            style: const TextStyle(color: CustomColors.white)
                                         ),
-                                        onPressed: () {
-                                          setState(() {
-                                            setS(() {
-                                              blurLayer.color =
-                                                  Colors.transparent;
-                                            });
-                                          });
+                                        onPressed: () async {
+                                         var color = await showPickerDialog(context,color: blurLayer.color);
+                                         if(color != null){
+                                           setS(() {
+                                             setState(() {
+                                               blurLayer.color = color;
+                                             });
+                                           });
+                                         }
                                         },
                                       )
                                     ]),
@@ -727,6 +742,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                                       TextButton(
                                         child: Text(
                                           i18n('Reset'),
+                                          style: const TextStyle(color: CustomColors.white),
                                         ),
                                         onPressed: () {
                                           setS(() {
@@ -763,6 +779,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                                       TextButton(
                                         child: Text(
                                           i18n('Reset'),
+                                          style: const TextStyle(color: CustomColors.white),
                                         ),
                                         onPressed: () {
                                           setS(() {
@@ -792,6 +809,38 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                 //     setState(() {});
                 //   },
                 // ),
+                BottomButton(
+                  icon: Icons.filter_vintage,
+                  text: 'Sticker',
+                  onTap: () async {
+
+                    String? stickerPath = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Stickers(),
+                      ),
+                    );
+
+                    if (stickerPath == null) return;
+
+                    removedLayers.clear();
+                    undoLayers.clear();
+                    var data = await rootBundle.load(stickerPath);
+
+                    var layer = BackgroundLayerData(
+                      file: ImageItem(
+                         data.buffer.asUint8List()
+                      ),
+                      isSticker: true
+                    );
+
+                    layers.add(layer);
+
+                    await layer.file.status;
+
+                    setState(() {});
+                  },
+                ),
                 BottomButton(
                   icon: Icons.photo,
                   text: 'Filter',

@@ -23,9 +23,13 @@ class Layer {
 /// Attributes used by [BackgroundLayer]
 class BackgroundLayerData extends Layer {
   ImageItem file;
+  bool isSticker;
+  double stickerSize;
 
   BackgroundLayerData({
     required this.file,
+    this.isSticker = false,
+    this.stickerSize = 100,
   });
 }
 

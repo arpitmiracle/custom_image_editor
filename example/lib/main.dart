@@ -28,7 +28,7 @@ class _ImageEditorExampleState extends State<ImageEditorExample> {
   @override
   void initState() {
     super.initState();
-    loadAsset("image.jpg");
+    loadAsset("image.png");
   }
 
   void loadAsset(String name) async {

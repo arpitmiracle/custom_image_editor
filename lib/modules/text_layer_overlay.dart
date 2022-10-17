@@ -1,5 +1,6 @@
 import 'package:custom_image_editor/utils/custom_colors.dart';
 import 'package:custom_image_editor/utils/extensions.dart';
+import 'package:custom_image_editor/utils/picker_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_image_editor/data/layer.dart';
 import 'package:custom_image_editor/custom_image_editor.dart';
@@ -99,14 +100,19 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.layer.color = CustomColors.black;
-                        widget.onUpdate();
-                      });
+                    child: Text(
+                      i18n('Custom'),
+                      style: const TextStyle(color: CustomColors.white)
+                    ),
+                    onPressed: () async {
+                      var color = await showPickerDialog(context,color: widget.layer.color);
+                      if(color != null){
+                        setState(() {
+                          widget.layer.color = color;
+                          widget.onUpdate();
+                        });
+                      }
                     },
-                    child: Text(i18n('Reset'),
-                        style: const TextStyle(color: CustomColors.white)),
                   ),
                   const SizedBox(width: 16),
                 ]),
@@ -132,16 +138,19 @@ class _TextLayerOverlayState extends State<TextLayerOverlay> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.layer.background = Colors.transparent;
-                        widget.onUpdate();
-                      });
-                    },
                     child: Text(
-                      i18n('Reset'),
-                      style: const TextStyle(color: CustomColors.white),
+                        i18n('Custom'),
+                        style: const TextStyle(color: CustomColors.white)
                     ),
+                    onPressed: () async {
+                      var color = await showPickerDialog(context,color: widget.layer.background);
+                      if(color != null){
+                        setState(() {
+                          widget.layer.background = color;
+                          widget.onUpdate();
+                        });
+                      }
+                    },
                   ),
                   const SizedBox(width: 16),
                 ]),

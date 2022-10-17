@@ -1,4 +1,5 @@
 import 'package:custom_image_editor/utils/custom_colors.dart';
+import 'package:custom_image_editor/utils/picker_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:custom_image_editor/data/layer.dart';
@@ -148,33 +149,34 @@ class _TextEditorImageState extends State<TextEditorImage> {
                       style: const TextStyle(color: CustomColors.white),
                     ),
                       SizedBox(height: 10.0),
-                    BarColorPicker(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      thumbColor: CustomColors.white,
-                      cornerRadius: 10,
-                      pickMode: PickMode.color,
-                      colorListener: (int value) {
-                        setState(() {
-                          currentColor = Color(value);
-                        });
-                      },
-                    ),
-                      SizedBox(height: 20.0),
-                    Text(
-                      i18n('Slider White Black Color'),
-                      style: const TextStyle(color: CustomColors.white),
-                    ),
-                      SizedBox(height: 10.0),
-                    BarColorPicker(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      thumbColor: CustomColors.white,
-                      cornerRadius: 10,
-                      pickMode: PickMode.grey,
-                      colorListener: (int value) {
-                        setState(() {
-                          currentColor = Color(value);
-                        });
-                      },
+                    Row(
+                      children: [
+                        BarColorPicker(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          thumbColor: CustomColors.white,
+                          cornerRadius: 10,
+                          pickMode: PickMode.color,
+                          colorListener: (int value) {
+                            setState(() {
+                              currentColor = Color(value);
+                            });
+                          },
+                        ),
+                        TextButton(
+                          child: Text(
+                              i18n('Custom'),
+                              style: const TextStyle(color: CustomColors.white)
+                          ),
+                          onPressed: () async {
+                            var color = await showPickerDialog(context,color: currentColor);
+                            if(color != null){
+                              setState(() {
+                                currentColor = color;
+                              });
+                            }
+                          },
+                        )
+                      ],
                     ),
                     SizedBox(height: 20.0),
                   ],
