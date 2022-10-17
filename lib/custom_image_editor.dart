@@ -663,13 +663,13 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                                     Center(
                                         child: Text(
                                           i18n('Slider Filter Color').toUpperCase(),
-                                          style: const TextStyle(color: Colors.white),
+                                          style: const TextStyle(color: CustomColors.white),
                                         )),
                                     const Divider(),
                                     const SizedBox(height: 10.0),
                                     Text(
                                       i18n('Slider Color'),
-                                      style: const TextStyle(color: Colors.white),
+                                      style: const TextStyle(color: CustomColors.white),
                                     ),
                                     const SizedBox(height: 10),
                                     Row(children: [
@@ -704,7 +704,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                                     ]),
                                     Text(
                                       i18n('Blur Radius'),
-                                      style: const TextStyle(color: Colors.white),
+                                      style: const TextStyle(color: CustomColors.white),
                                     ),
                                     const SizedBox(height: 10.0),
                                     Row(children: [
@@ -740,7 +740,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                                     const SizedBox(height: 5.0),
                                     Text(
                                       i18n('Color Opacity'),
-                                      style: const TextStyle(color: Colors.white),
+                                      style: const TextStyle(color: CustomColors.white),
                                     ),
                                     const SizedBox(height: 10.0),
                                     Row(children: [

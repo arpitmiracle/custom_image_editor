@@ -1,3 +1,4 @@
+import 'package:custom_image_editor/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_image_editor/data/data.dart';
 import 'package:custom_image_editor/data/layer.dart';
@@ -21,7 +22,7 @@ class _EmojiesState extends State<Emojies> {
           topLeft: Radius.circular(32),
           topRight: Radius.circular(32),
         ),
-        color: Colors.black,
+        color: CustomColors.black,
         boxShadow: [
           BoxShadow(
             blurRadius: 10.9,
@@ -35,7 +36,7 @@ class _EmojiesState extends State<Emojies> {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
               i18n('Select Emoji'),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: CustomColors.white),
             ),
           ]),
           const Divider(height: 1),

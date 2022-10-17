@@ -1,3 +1,4 @@
+import 'package:custom_image_editor/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_image_editor/data/layer.dart';
 import 'package:custom_image_editor/custom_image_editor.dart';
@@ -33,7 +34,7 @@ class _EmojiLayerOverlayState extends State<EmojiLayerOverlay> {
     return Container(
       height: 170,
       decoration: const BoxDecoration(
-        color: Colors.black87,
+        color: CustomColors.black87,
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(10), topLeft: Radius.circular(10)),
       ),
@@ -43,13 +44,13 @@ class _EmojiLayerOverlayState extends State<EmojiLayerOverlay> {
           Center(
             child: Text(
               i18n('Size Adjust').toUpperCase(),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: CustomColors.white),
             ),
           ),
           const Divider(),
           Slider(
-              activeColor: Colors.white,
-              inactiveColor: Colors.grey,
+              activeColor: CustomColors.white,
+              inactiveColor: CustomColors.grey,
               value: widget.layer.size,
               min: 0.0,
               max: 100.0,
@@ -80,7 +81,7 @@ class _EmojiLayerOverlayState extends State<EmojiLayerOverlay> {
                 },
                 child: Text(
                   i18n('Remove'),
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: CustomColors.white),
                 ),
               ),
             ),

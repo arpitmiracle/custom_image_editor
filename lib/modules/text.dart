@@ -1,3 +1,4 @@
+import 'package:custom_image_editor/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:custom_image_editor/data/layer.dart';
@@ -14,7 +15,7 @@ class TextEditorImage extends StatefulWidget {
 
 class _TextEditorImageState extends State<TextEditorImage> {
   TextEditingController name = TextEditingController();
-  Color currentColor = Colors.white;
+  Color currentColor = CustomColors.white;
   double slider = 25.0;
   TextAlign align = TextAlign.left;
 
@@ -30,8 +31,8 @@ class _TextEditorImageState extends State<TextEditorImage> {
             IconButton(
               icon: Icon(FontAwesomeIcons.alignLeft,
                   color: align == TextAlign.left
-                      ? Colors.white
-                      : Colors.white.withAlpha(80)),
+                      ? CustomColors.white
+                      : CustomColors.white.withAlpha(80)),
               onPressed: () {
                 setState(() {
                   align = TextAlign.left;
@@ -41,8 +42,8 @@ class _TextEditorImageState extends State<TextEditorImage> {
             IconButton(
               icon: Icon(FontAwesomeIcons.alignCenter,
                   color: align == TextAlign.center
-                      ? Colors.white
-                      : Colors.white.withAlpha(80)),
+                      ? CustomColors.white
+                      : CustomColors.white.withAlpha(80)),
               onPressed: () {
                 setState(() {
                   align = TextAlign.center;
@@ -52,8 +53,8 @@ class _TextEditorImageState extends State<TextEditorImage> {
             IconButton(
               icon: Icon(FontAwesomeIcons.alignRight,
                   color: align == TextAlign.right
-                      ? Colors.white
-                      : Colors.white.withAlpha(80)),
+                      ? CustomColors.white
+                      : CustomColors.white.withAlpha(80)),
               onPressed: () {
                 setState(() {
                   align = TextAlign.right;
@@ -61,7 +62,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.check,color: Colors.white),
+              icon: const Icon(Icons.check,color: CustomColors.white),
               onPressed: () {
                 Navigator.pop(
                   context,
@@ -74,7 +75,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                   ),
                 );
               },
-              color: Colors.black,
+              color: CustomColors.black,
               padding: const EdgeInsets.all(15),
             )
           ],
@@ -91,7 +92,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.all(10),
                     hintText: 'Insert Your Message',
-                    hintStyle: TextStyle(color: Colors.grey,fontSize: 20),
+                    hintStyle: TextStyle(color: CustomColors.grey,fontSize: 20),
                     alignLabelWithHint: true,
                   ),
                   keyboardType: TextInputType.multiline,
@@ -112,20 +113,20 @@ class _TextEditorImageState extends State<TextEditorImage> {
                   children: [
                     //   SizedBox(height: 20.0),
                     Container(
-                      color: Colors.black,
+                      color: CustomColors.black,
                       child: Column(
                         children: [
                           const SizedBox(height: 10.0),
                           Center(
                             child: Text(
                               i18n('Size Adjust').toUpperCase(),
-                              style: const TextStyle(color: Colors.white),
+                              style: const TextStyle(color: CustomColors.white),
                             ),
                           ),
                           const SizedBox(height: 10.0),
                           Slider(
-                              activeColor: Colors.white,
-                              inactiveColor: Colors.grey,
+                              activeColor: CustomColors.white,
+                              inactiveColor: CustomColors.grey,
                               value: slider,
                               min: 0.0,
                               max: 100.0,
@@ -144,12 +145,12 @@ class _TextEditorImageState extends State<TextEditorImage> {
                     ),
                     Text(
                       i18n('Slider Color'),
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: CustomColors.white),
                     ),
                       SizedBox(height: 10.0),
                     BarColorPicker(
                       width: MediaQuery.of(context).size.width * 0.8,
-                      thumbColor: Colors.white,
+                      thumbColor: CustomColors.white,
                       cornerRadius: 10,
                       pickMode: PickMode.color,
                       colorListener: (int value) {
@@ -161,12 +162,12 @@ class _TextEditorImageState extends State<TextEditorImage> {
                       SizedBox(height: 20.0),
                     Text(
                       i18n('Slider White Black Color'),
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: CustomColors.white),
                     ),
                       SizedBox(height: 10.0),
                     BarColorPicker(
                       width: MediaQuery.of(context).size.width * 0.8,
-                      thumbColor: Colors.white,
+                      thumbColor: CustomColors.white,
                       cornerRadius: 10,
                       pickMode: PickMode.grey,
                       colorListener: (int value) {

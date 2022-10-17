@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:custom_image_editor/utils/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 enum PickMode {
@@ -52,7 +53,7 @@ class BarColorPicker extends StatefulWidget {
     this.cornerRadius = 0.0,
     this.thumbRadius = 8,
     this.initialColor = const Color(0xffff0000),
-    this.thumbColor = Colors.black,
+    this.thumbColor = CustomColors.black,
     required this.colorListener,
   }) : super(key: key);
 
@@ -226,7 +227,7 @@ class CircleColorPicker extends StatefulWidget {
     Key? key,
     this.radius = 120,
     this.initialColor = const Color(0xffff0000),
-    this.thumbColor = Colors.black,
+    this.thumbColor = CustomColors.black,
     this.thumbRadius = 8,
     required this.colorListener,
   }) : super(key: key);
