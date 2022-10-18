@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 void main() {
   runApp(
     const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: ImageEditorExample(),
     ),
   );
@@ -53,7 +54,7 @@ class _ImageEditorExampleState extends State<ImageEditorExample> {
             onPressed: () async {
               var editedImage = await Navigator.push(
                 context,
-                MaterialPageRoute(
+                FadePageRoute(
                   builder: (context) => CustomImageEditor(
                     image: imageData,
                   ),
@@ -72,7 +73,7 @@ class _ImageEditorExampleState extends State<ImageEditorExample> {
             onPressed: () async {
               var editedImage = await Navigator.push(
                 context,
-                MaterialPageRoute(
+                FadePageRoute(
                   builder: (context) => CustomImageEditor(
                     images: [
                       imageData,

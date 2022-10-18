@@ -8,11 +8,13 @@ import 'package:custom_image_editor/modules/text_layer_overlay.dart';
 class TextLayer extends StatefulWidget {
   final TextLayerData layerData;
   final VoidCallback? onUpdate;
+  final VoidCallback? onLongPress;
 
   const TextLayer({
     Key? key,
     required this.layerData,
     this.onUpdate,
+    this.onLongPress,
   }) : super(key: key);
   @override
   _TextViewState createState() => _TextViewState();
@@ -68,6 +70,43 @@ class _TextViewState extends State<TextLayer> {
             widget.layerData.rotation = detail.rotation;
           }
           setState(() {});
+        },
+        onLongPress: () {
+          TextEditingController textFieldController = TextEditingController(text: widget.layerData.text.toString());
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Insert Your Message'),
+                contentPadding: EdgeInsets.only(bottom: 24,left: 24,right: 24),
+                content: Container(
+                  width: double.infinity,
+                  child: TextField(
+                    controller: textFieldController,
+                    maxLines: 5,
+                    textInputAction: TextInputAction.newline,
+                    decoration: InputDecoration(hintText: "Type something"),
+                  ),
+                ),
+                actions: <Widget>[
+                  ElevatedButton(
+                    child: Text('CANCEL'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      widget.layerData.text = textFieldController.text;
+                      if (widget.onUpdate != null) widget.onUpdate!();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
         },
         child: Transform.rotate(
           angle: widget.layerData.rotation,
