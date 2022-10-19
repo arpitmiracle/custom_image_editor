@@ -1,5 +1,6 @@
 import 'package:custom_image_editor/data/image_item.dart';
 import 'package:custom_image_editor/utils/custom_colors.dart';
+import 'package:custom_image_editor/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_image_editor/data/data.dart';
 import 'package:custom_image_editor/data/layer.dart';
@@ -40,41 +41,36 @@ class _StickersState extends State<Stickers> {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            const SizedBox(height: 16),
-            Container(
-              child: GridView.builder(
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(10.0),
-                physics: const ClampingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 10.0,
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                ),
-                itemCount: stickers.length,
-                itemBuilder: (context, index) {
-                  return GridTile(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(
-                            context,
-                            stickers[index],
-                          );
-                        },
-                        child: Container(
-                          padding: EdgeInsets.zero,
-                          child: Image.asset(
-                            stickers[index],
-                          ),
-                        ),
-                      ));
-                },
-              ),
-            )
-          ],
+        body: Container(
+          child: GridView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(10.0),
+            physics: const ClampingScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 10.0,
+              crossAxisCount: 3,
+              crossAxisSpacing: 10,
+            ),
+            itemCount: stickers.length,
+            itemBuilder: (context, index)  {
+              return GridTile(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(
+                        context,
+                        stickers[index],
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.zero,
+                      child: Image.asset(
+                        stickers[index],
+                      ),
+                    ),
+                  ));
+            },
+          ),
         ),
       ),
     );
