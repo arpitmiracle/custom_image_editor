@@ -1,15 +1,18 @@
 import 'dart:typed_data';
 
 import 'package:custom_image_editor/custom_image_editor.dart';
-import 'package:custom_image_editor/custom_image_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ImageEditorExample(),
+    GlobalLoaderOverlay(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        builder: (context, child) => LoaderOverlay(overlayColor: Colors.black38,useDefaultLoading: false,overlayWidget: Center(child: CircularProgressIndicator(color: Colors.blue)),child: child!),
+        home: ImageEditorExample(),
+      ),
     ),
   );
 }

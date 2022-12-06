@@ -17,6 +17,7 @@ import 'package:custom_image_editor/modules/all_emojies.dart';
 import 'package:custom_image_editor/layers/emoji_layer.dart';
 import 'package:custom_image_editor/modules/text.dart';
 import 'package:custom_image_editor/layers/text_layer.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:screenshot/screenshot.dart';
 import 'dart:math' as math;
 import 'image_drawing.dart';
@@ -402,9 +403,9 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
         icon: const Icon(Icons.check),
         onPressed: () async {
           resetTransformation();
-
+          context.loaderOverlay.show();
           var binaryIntList = await screenshotController.capture(pixelRatio: pixelRatio);
-
+          context.loaderOverlay.hide();
           layers.clear();
           undoLayers.clear();
           removedLayers.clear();
@@ -595,10 +596,10 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   text: 'Crop',
                   onTap: () async {
                     resetTransformation();
-
+                    context.loaderOverlay.show();
                     var data = await screenshotController.capture(
                         pixelRatio: pixelRatio);
-
+                    context.loaderOverlay.hide();
                     Uint8List? img = await Navigator.push(
                       context,
                       FadePageRoute(
@@ -827,11 +828,11 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                     );
 
                     if (stickerPath == null) return;
-
+                    context.loaderOverlay.show();
                     removedLayers.clear();
                     undoLayers.clear();
                     var data = await rootBundle.load(stickerPath);
-
+                    context.loaderOverlay.hide();
                     var layer = BackgroundLayerData(
                       file: ImageItem(
                          data.buffer.asUint8List()
@@ -851,10 +852,10 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   text: 'Filter',
                   onTap: () async {
                     resetTransformation();
-
+                    context.loaderOverlay.show();
                     var data = await screenshotController.capture(
                         pixelRatio: pixelRatio);
-
+                    context.loaderOverlay.hide();
                     Uint8List? editedImage = await Navigator.push(
                       context,
                       FadePageRoute(
@@ -975,6 +976,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
   final picker = ImagePicker();
 
   Future<void> loadImage(dynamic imageFile) async {
+    context.loaderOverlay.show();
+
     await currentImage.load(imageFile);
 
     layers.clear();
@@ -982,6 +985,8 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
     layers.add(BackgroundLayerData(
       file: currentImage,
     ));
+
+    context.loaderOverlay.hide();
 
     setState(() {});
   }
