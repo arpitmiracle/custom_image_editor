@@ -43,6 +43,7 @@ class CustomImageEditor extends StatelessWidget {
   final Directory? savePath;
   final int maxLength;
   final bool allowGallery, allowCamera, allowMultiple;
+  final Widget? appBarTitle;
 
   const CustomImageEditor(
       {Key? key,
@@ -53,6 +54,7 @@ class CustomImageEditor extends StatelessWidget {
         this.allowGallery = false,
         this.allowMultiple = false,
         this.maxLength = 99,
+        this.appBarTitle,
         Color? appBar})
       : super(key: key);
 
@@ -78,6 +80,7 @@ class CustomImageEditor extends StatelessWidget {
         savePath: savePath,
         allowCamera: allowCamera,
         allowGallery: allowGallery,
+        appBarTitle: appBarTitle,
       );
     }
   }
@@ -308,6 +311,7 @@ class SingleImageEditor extends StatefulWidget {
   final dynamic image;
   final List? imageList;
   final bool allowCamera, allowGallery;
+  final Widget? appBarTitle;
 
   const SingleImageEditor({
     Key? key,
@@ -316,6 +320,7 @@ class SingleImageEditor extends StatefulWidget {
     this.imageList,
     this.allowCamera = false,
     this.allowGallery = false,
+    this.appBarTitle,
   }) : super(key: key);
 
   @override
@@ -512,6 +517,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
           systemOverlayStyle: SystemUiOverlayStyle.light,
           automaticallyImplyLeading: false,
           actions: filterActions,
+          title: widget.appBarTitle,
         ),
         body: GestureDetector(
           onScaleUpdate: (details) {
