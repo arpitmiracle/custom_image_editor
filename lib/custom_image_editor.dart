@@ -347,7 +347,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
   List<Widget> get filterActions {
     return [
       const BackButton(),
-      const Spacer(),
+      widget.appBarTitle == null ? const Spacer() : Expanded(child: widget.appBarTitle!),
       IconButton(
         icon: Icon(Icons.undo,
             color:
@@ -517,7 +517,6 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
           systemOverlayStyle: SystemUiOverlayStyle.light,
           automaticallyImplyLeading: false,
           actions: filterActions,
-          title: widget.appBarTitle,
         ),
         body: GestureDetector(
           onScaleUpdate: (details) {
